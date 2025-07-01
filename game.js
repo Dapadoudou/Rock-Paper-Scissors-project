@@ -1,4 +1,6 @@
 //const { createElement } = require("react");
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
@@ -7,11 +9,21 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  const yourChoice = prompt("Player: What is your choice? (rock, paper, scissors)");
-  return yourChoice.toLowerCase();
+  const humanChoice = "";
+  If (rockBtn.clicked) {
+  humanChoice = "rock";
+} else if (paperBtn.clicked) {
+  humanChoice = "paper";
+} else (scissorsBtn.clicked) {
+  humanChoice = "scissors";
 }
+  return humanChoice.toLowerCase();
+}
+  
 
 function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toLowerCase();
+    computerChoice = computerChoice.toLowerCase();
   if (humanChoice === computerChoice) {
     console.log("It's a tie");
     return "tie";
@@ -50,10 +62,34 @@ function playGame() {
   }
 playGame();
 */
+
+
+function displayResult(result) {
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
+    const result = playRound(humanChoice, computerChoice);
+
+    if (result === "human") {
+      humanScore++;
+    } else if (result === "computer") {
+      computerScore++;
+    }
+
+    console.log(`Score after round ${i + 1}: Human ${humanScore} - Computer ${computerScore}`);
+  }
+ if (humanScore === 5 || computerScore === 5) {
+  console.log("Game ended");
+ }
+ {
+  console.log("Final score:");
+  console.log(`Human: ${humanScore} - Computer: ${computerScore}`);
+  };
+
+
 let paperBtn = document.createElement("button");
 paperBtn.innerText = "Paper";
 paperBtn.addEventListener("click", () => { 
-    const humanChoice = "Paper";
+    const humanChoice = "paper";
     const computerChoice = getComputerChoice();
     console.log("Paper button clicked"); 
     playRound(humanChoice, computerChoice);
@@ -62,7 +98,7 @@ paperBtn.addEventListener("click", () => {
 let rockBtn = document.createElement("button");
 rockBtn.innerText = "Rock";
 rockBtn.addEventListener("click", () => { 
-      const humanChoice = "Rock";
+      const humanChoice = "rock";
       const computerChoice = getComputerChoice();
       console.log("Rock button clicked"); 
       playRound(humanChoice, computerChoice);
@@ -71,7 +107,7 @@ rockBtn.addEventListener("click", () => {
 let scissorsBtn = document.createElement("button");
 scissorsBtn.innerText = "Scissors";  
 scissorsBtn.addEventListener("click", () => { 
-    const humanChoice = "Scissors";
+    const humanChoice = "scissors";
     const computerChoice = getComputerChoice();
     console.log("Scissors button clicked"); 
     playRound(humanChoice, computerChoice);
@@ -79,3 +115,9 @@ scissorsBtn.addEventListener("click", () => {
 document.body.appendChild(paperBtn);
 document.body.appendChild(rockBtn);
 document.body.appendChild(scissorsBtn);
+
+let results = document.createElement("div");
+document.body.appendChild(results);
+results.innerText = "Results will be displayed here";
+
+
