@@ -1,3 +1,5 @@
+//const { createElement } = require("react");
+
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   const randomIndex = Math.floor(Math.random() * choices.length);
@@ -25,7 +27,7 @@ function playRound(humanChoice, computerChoice) {
     return "computer";
   }
 }
-
+/*
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
@@ -47,3 +49,33 @@ function playGame() {
   console.log(`Human: ${humanScore} - Computer: ${computerScore}`);
   }
 playGame();
+*/
+let paperBtn = document.createElement("button");
+paperBtn.innerText = "Paper";
+paperBtn.addEventListener("click", () => { 
+    const humanChoice = "Paper";
+    const computerChoice = getComputerChoice();
+    console.log("Paper button clicked"); 
+    playRound(humanChoice, computerChoice);
+});
+
+let rockBtn = document.createElement("button");
+rockBtn.innerText = "Rock";
+rockBtn.addEventListener("click", () => { 
+      const humanChoice = "Rock";
+      const computerChoice = getComputerChoice();
+      console.log("Rock button clicked"); 
+      playRound(humanChoice, computerChoice);
+});
+
+let scissorsBtn = document.createElement("button");
+scissorsBtn.innerText = "Scissors";  
+scissorsBtn.addEventListener("click", () => { 
+    const humanChoice = "Scissors";
+    const computerChoice = getComputerChoice();
+    console.log("Scissors button clicked"); 
+    playRound(humanChoice, computerChoice);
+});
+document.body.appendChild(paperBtn);
+document.body.appendChild(rockBtn);
+document.body.appendChild(scissorsBtn);
