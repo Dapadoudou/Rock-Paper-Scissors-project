@@ -69,9 +69,8 @@ playGame();
 
 
 function displayResult(humanChoice) {
-  if (gameEnded) {
-    return "End of game"
-  }
+  if (gameEnded) return;
+  
     //const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
     const result = playRound(humanChoice, computerChoice);
@@ -81,17 +80,14 @@ function displayResult(humanChoice) {
     } else if (result === "computer") {
       computerScore++;
     }
-    round++;
-    console.log(`Score after round ${round}: Human ${humanScore} - Computer ${computerScore}`);
-  }
+
+console.log(`Score after round ${round}: Human ${humanScore} - Computer ${computerScore}`);
+  
  if (humanScore === 5 || computerScore === 5) {
-  console.log("Game ended");
   gameEnded = true;
-  } 
- {
-  console.log("Final score:");
-  console.log(`Human: ${humanScore} - Computer: ${computerScore}`);
-};
+  console.log("Game ended");
+  result.innerText = `Final score: Human: ${humanScore} - Computer: ${computerScore}`;
+}};
 
 
 let paperBtn = document.createElement("button");
@@ -115,6 +111,6 @@ let results = document.createElement("div");
 document.body.appendChild(results);
 results.innerText = "Results will be displayed here";
 
-results.innerText += `\nRound ${round}: ${result.toUpperCase()} - Human: ${humanScore}, Computer: ${computerScore}`;
+//results.innerText += `\nRound ${round}: ${results.toUpperCase()} - Human: ${humanScore}, Computer: ${computerScore}`;
 //results.innerText += `\n🎮 Game Over! ${humanScore === 5 ? "You win!" : "Computer wins!"}`;
 
