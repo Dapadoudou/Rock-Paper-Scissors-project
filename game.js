@@ -1,6 +1,8 @@
 //const { createElement } = require("react");
 let humanScore = 0;
 let computerScore = 0;
+let gameEnded = false;
+let round = 0;
 
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
@@ -8,9 +10,10 @@ function getComputerChoice() {
   return choices[randomIndex];
 }
 
-function getHumanChoice() {
+// No more use of the function getHumanChoice() as we are using buttons to get the human choice
+/*function getHumanChoice() {
   const humanChoice = "";
-  If (rockBtn.clicked) {
+  if (rockBtn.clicked) {
   humanChoice = "rock";
 } else if (paperBtn.clicked) {
   humanChoice = "paper";
@@ -18,7 +21,7 @@ function getHumanChoice() {
   humanChoice = "scissors";
 }
   return humanChoice.toLowerCase();
-}
+}*/
   
 
 function playRound(humanChoice, computerChoice) {
@@ -39,6 +42,7 @@ function playRound(humanChoice, computerChoice) {
     return "computer";
   }
 }
+
 /*
 function playGame() {
   let humanScore = 0;
@@ -64,8 +68,11 @@ playGame();
 */
 
 
-function displayResult(result) {
-    const humanChoice = getHumanChoice();
+function displayResult(humanChoice) {
+  if (gameEnded) {
+    return "End of game"
+  }
+    //const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
     const result = playRound(humanChoice, computerChoice);
 
@@ -74,44 +81,32 @@ function displayResult(result) {
     } else if (result === "computer") {
       computerScore++;
     }
-
-    console.log(`Score after round ${i + 1}: Human ${humanScore} - Computer ${computerScore}`);
+    round++;
+    console.log(`Score after round ${round}: Human ${humanScore} - Computer ${computerScore}`);
   }
  if (humanScore === 5 || computerScore === 5) {
   console.log("Game ended");
- }
+  gameEnded = true;
+  } 
  {
   console.log("Final score:");
   console.log(`Human: ${humanScore} - Computer: ${computerScore}`);
-  };
+};
 
 
 let paperBtn = document.createElement("button");
 paperBtn.innerText = "Paper";
-paperBtn.addEventListener("click", () => { 
-    const humanChoice = "paper";
-    const computerChoice = getComputerChoice();
-    console.log("Paper button clicked"); 
-    playRound(humanChoice, computerChoice);
-});
+paperBtn.addEventListener("click", () => displayResult("paper"));
+
 
 let rockBtn = document.createElement("button");
 rockBtn.innerText = "Rock";
-rockBtn.addEventListener("click", () => { 
-      const humanChoice = "rock";
-      const computerChoice = getComputerChoice();
-      console.log("Rock button clicked"); 
-      playRound(humanChoice, computerChoice);
-});
+rockBtn.addEventListener("click", () => displayResult("rock"));
 
 let scissorsBtn = document.createElement("button");
 scissorsBtn.innerText = "Scissors";  
-scissorsBtn.addEventListener("click", () => { 
-    const humanChoice = "scissors";
-    const computerChoice = getComputerChoice();
-    console.log("Scissors button clicked"); 
-    playRound(humanChoice, computerChoice);
-});
+scissorsBtn.addEventListener("click", () => displayResult("scissors"));
+
 document.body.appendChild(paperBtn);
 document.body.appendChild(rockBtn);
 document.body.appendChild(scissorsBtn);
@@ -120,4 +115,6 @@ let results = document.createElement("div");
 document.body.appendChild(results);
 results.innerText = "Results will be displayed here";
 
+results.innerText += `\nRound ${round}: ${result.toUpperCase()} - Human: ${humanScore}, Computer: ${computerScore}`;
+//results.innerText += `\n🎮 Game Over! ${humanScore === 5 ? "You win!" : "Computer wins!"}`;
 
